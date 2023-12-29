@@ -49,13 +49,124 @@ pred_proba = clf.predict_proba(X_test)[:, 1]
 
 # 성능 지표를 출력합니다.
 print_eval(y_test, pred, pred_proba)
+```
+```
+Output:
 
+Confusion Matrix
+[[87 13]
+ [22 32]]
+Accuracy: 0.7727 Precision: 0.7111 Recall: 0.5926
+F1: 0.6465 ROC AUC: 0.8083
+```
+
+```python
 # ROC 곡선과 정밀도-재현율 곡선을 그립니다.
 roc_curve_plot(y_test, pred_proba)
-precision_recall_curve_plot(y_test, pred_proba)
+```
+![Alt text](image-1.png)
 
+```python
+precision_recall_curve_plot(y_test, pred_proba)
+```
+![Alt text](image.png)
+
+```python
 # 다양한 임계값에서의 성능 평가를 수행합니다.
 thresholds = [0.3, 0.4, 0.5, 0.6, 0.7]
 eval_df = get_eval_by_threshold(y_test, pred_proba.reshape(-1, 1), thresholds)
 print(eval_df)
 ```
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Accuracy</th>
+      <th>Precision</th>
+      <th>Recall</th>
+      <th>F1</th>
+      <th>ROC AUC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0.30</th>
+      <td>0.701299</td>
+      <td>0.551282</td>
+      <td>0.796296</td>
+      <td>0.651515</td>
+      <td>0.843333</td>
+    </tr>
+    <tr>
+      <th>0.33</th>
+      <td>0.740260</td>
+      <td>0.597222</td>
+      <td>0.796296</td>
+      <td>0.682540</td>
+      <td>0.843333</td>
+    </tr>
+    <tr>
+      <th>0.36</th>
+      <td>0.746753</td>
+      <td>0.619048</td>
+      <td>0.722222</td>
+      <td>0.666667</td>
+      <td>0.843333</td>
+    </tr>
+    <tr>
+      <th>0.39</th>
+      <td>0.753247</td>
+      <td>0.633333</td>
+      <td>0.703704</td>
+      <td>0.666667</td>
+      <td>0.843333</td>
+    </tr>
+    <tr>
+      <th>0.42</th>
+      <td>0.779221</td>
+      <td>0.692308</td>
+      <td>0.666667</td>
+      <td>0.679245</td>
+      <td>0.843333</td>
+    </tr>
+    <tr>
+      <th>0.45</th>
+      <td>0.785714</td>
+      <td>0.705882</td>
+      <td>0.666667</td>
+      <td>0.685714</td>
+      <td>0.843333</td>
+    </tr>
+    <tr>
+      <th>0.48</th>
+      <td>0.798701</td>
+      <td>0.744681</td>
+      <td>0.648148</td>
+      <td>0.693069</td>
+      <td>0.843333</td>
+    </tr>
+    <tr>
+      <th>0.50</th>
+      <td>0.798701</td>
+      <td>0.767442</td>
+      <td>0.611111</td>
+      <td>0.680412</td>
+      <td>0.843333</td>
+    </tr>
+  </tbody>
+</table>
+</div>
