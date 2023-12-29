@@ -38,8 +38,12 @@ def get_clf_eval(y_test, pred, pred_proba=None):
     precision = precision_score(y_test, pred, average=average_type)
     recall = recall_score(y_test, pred, average=average_type)
     f1 = f1_score(y_test, pred, average=average_type)
+    
     if pred_proba is not None:
-        roc_score = roc_auc_score(y_test, pred_proba, average=average_type)
+        if class_count == 2:
+            roc_score = roc_auc_score(y_test, pred_proba)
+        else:
+            roc_score = roc_auc_score(y_test, pred_proba, average=average_type)
         print('ROC AUC:', round(roc_score, 4))
     
     print('Confusion Matrix')
@@ -47,7 +51,6 @@ def get_clf_eval(y_test, pred, pred_proba=None):
     print('Accuracy:', round(accuracy, 4), 'Precision:', round(precision, 4), 
           'Recall:', round(recall, 4))
     print('F1:', round(f1, 4))
-
 
 
 def get_eval_by_threshold(y_test, pred_proba, thresholds):
