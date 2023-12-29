@@ -77,20 +77,8 @@ thresholds = [0.3, 0.4, 0.5, 0.6, 0.7]
 eval_df = get_eval_by_threshold(y_test, pred_proba.reshape(-1, 1), thresholds)
 print(eval_df)
 ```
+
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">

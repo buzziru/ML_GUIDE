@@ -38,7 +38,7 @@ def get_clf_eval(y_test, pred, pred_proba=None):
         if class_count == 2:
             roc_score = roc_auc_score(y_test, pred_proba)
         else:
-            roc_score = roc_auc_score(y_test, pred_proba, average=average_type)
+            roc_score = roc_auc_score(y_test, pred_proba, average=average_type, multi_class='ovr')
     
     return accuracy, precision, recall, f1, confusion, roc_score
 
@@ -58,7 +58,11 @@ def print_eval(y_test, pred, pred_proba=None):
     print(confusion)
     print('Accuracy:', round(accuracy, 4), 'Precision:', round(precision, 4), 
           'Recall:', round(recall, 4))
-    print('F1:', round(f1, 4), 'ROC AUC:', round(roc_score, 4))
+    
+    if roc_score is not None:
+        print('F1:', round(f1, 4), 'ROC AUC:', round(roc_score, 4))
+    else:
+        print('F1:', round(f1, 4))
 
 
 def get_eval_by_threshold(y_test, pred_proba, thresholds):
